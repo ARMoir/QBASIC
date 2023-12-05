@@ -112,8 +112,10 @@ DO
 			FrameChar(Position) = "0"
 			Feed = 1
 			Length = Length + 1
+			SOUND 370, 1
 		ELSE		
 			Dead = 1
+			SOUND 330, 1
 		END IF
 	ELSE
 		FrameChar(Position) = "0"
