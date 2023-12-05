@@ -3,9 +3,9 @@ RANDOMIZE TIMER
 DIM Frame AS STRING
 DIM FrameString AS STRING
 DIM Directions AS STRING
-DIM fWidth AS INTEGER
+DIM Wide AS INTEGER
 DIM Position AS INTEGER
-DIM LenFrameString AS INTEGER
+DIM FrameLength AS INTEGER
 DIM Length AS INTEGER
 DIM Locations(Length) AS INTEGER
 DIM Feed AS INTEGER
@@ -23,32 +23,32 @@ Feed = 1
 
 CLS
 Frame = SetFrame
-LenFrameString = LEN(Frame)
+FrameLength = LEN(Frame)
 
-DIM FrameChar(1 TO LenFrameString) AS STRING
+DIM FrameChar(1 TO FrameLength) AS STRING
 
 ' Convert the string to an array of characters
-FOR i = 1 TO LenFrameString
+FOR i = 1 TO FrameLength
 	FrameChar(i) = MID$(Frame, i, 1)
 NEXT i
 
 ' Set the Values for Movement Calculations
 DO
-	fWidth = fWidth + 1
-LOOP UNTIL FrameChar(fWidth) = CHR$(10)	
+	Wide = Wide + 1
+LOOP UNTIL FrameChar(Wide) = CHR$(10)	
 
-Position = (LenFrameString / 2) + (fWidth / 2)
+Position = (FrameLength / 2) + (Wide / 2)
 
 DO
 	Count = Count + 1
 	FrameString = Frame
 	
-	FOR i = 1 TO LenFrameString
+	FOR i = 1 TO FrameLength
 		FrameChar(i) = MID$(FrameString, i, 1)
 	NEXT i
 	
 	IF Feed = 1 THEN
-		Food = INT(RND * LenFrameString + 1)
+		Food = INT(RND * FrameLength + 1)
 		IF FrameChar(Food) = " " THEN
 			Feed = 0
 		END IF
@@ -93,11 +93,11 @@ DO
 	END IF
 	
 	IF Directions = "UP" THEN
-		Position = Position - fWidth
+		Position = Position - Wide
 	END IF
 	
 	IF Directions = "DOWN" THEN
-		Position = Position + fWidth
+		Position = Position + Wide
 	END IF
 	
 	REDIM PRESERVE Locations(Count) AS INTEGER
@@ -121,7 +121,7 @@ DO
 			
 	FrameString = ""
 	
-	FOR i = 1 TO LenFrameString
+	FOR i = 1 TO FrameLength
 		FrameString = FrameString + FrameChar(i)
 	NEXT i
 
