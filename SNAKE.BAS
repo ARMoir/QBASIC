@@ -44,28 +44,28 @@ DO
 	IF Feed = 0 THEN
 		MID$(Display, Food, 1)  = "*"
 	END IF
-    	
+
 	key$ = INKEY$
 
 	IF key$ <> "" THEN
-        SELECT CASE UCASE$(key$)
-            CASE "W": Directions = "UP"
-            CASE "A": Directions = "LEFT"
-            CASE "S": Directions = "DOWN"
-            CASE "D": Directions = "RIGHT"
-            CASE "Q": EXIT DO
-        END SELECT
-    END IF
-	
+		SELECT CASE UCASE$(key$)
+			CASE "W": Directions = "UP"
+			CASE "A": Directions = "LEFT"
+			CASE "S": Directions = "DOWN"
+			CASE "D": Directions = "RIGHT"
+			CASE "Q": EXIT DO
+		END SELECT
+	END IF
+
 	IF Directions = "LEFT" THEN
-        Position = Position - 1
-    ELSEIF Directions = "RIGHT" THEN
-        Position = Position + 1
-    ELSEIF Directions = "UP" THEN
-        Position = Position - Wide
-    ELSEIF Directions = "DOWN" THEN
-        Position = Position + Wide
-    END IF
+		Position = Position - 1
+	ELSEIF Directions = "RIGHT" THEN
+		Position = Position + 1
+	ELSEIF Directions = "UP" THEN
+		Position = Position - Wide
+	ELSEIF Directions = "DOWN" THEN
+		Position = Position + Wide
+	END IF
 	
 	REDIM PRESERVE Locations(Count) AS INTEGER
 	Locations(Count) = Position
@@ -73,7 +73,7 @@ DO
 	FOR i = (Count - 1) TO (Count - Length) STEP -1
 		MID$(Display, Locations(i), 1)  = "O"
 	NEXT i
-		
+
 	IF MID$(Display, Position, 1) <> " " THEN	
 		IF MID$(Display, Position, 1) = "*" THEN
 			MID$(Display, Position, 1) = "0"
@@ -92,17 +92,16 @@ DO
 	LOCATE 1, 1
 	PRINT Display	
 	PRINT "Score: "; Length
-	
+
 	IF Speed <= 0 THEN
 		Speed = 0.01
 	END IF
 	
 	Start = TIMER
 	DO
-    LOOP UNTIL TIMER > Start + Speed
+	LOOP UNTIL TIMER > Start + Speed
 
 LOOP WHILE Dead = 0
-
 
 FUNCTION SetFrame$
 	DIM i AS INTEGER
